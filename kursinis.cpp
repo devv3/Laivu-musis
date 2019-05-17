@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include <iostream>
+#include<ctime>
 using namespace std;
 
 class laivai
@@ -7,12 +8,24 @@ class laivai
 private:
 	const static int eil = 10;
 	const static int stulp = 10;
+	const static int cpueil = 10;
+	const static int cpustulp = 10;
+	int cpu_eil;
+	int cpu_stulp;
+	int p_eil;
+	int p_stulp;
 	int kord;
 	int mLaivai = 0;
+	int cpuLaivai = 0;
 	int x, y;
 	bool tinka;
+	bool cpuTinka;
 	char kryptis;
+	int cpuKryptis;
 	char grid[eil][stulp];
+	char gridcpu[cpueil][cpustulp];
+	char p_l_koord[10];
+	char hv[10];
 public:
 	laivai()
 	{
@@ -21,6 +34,13 @@ public:
 			for (int y = 0; y < stulp; y++)
 			{
 				grid[x][y] = '*';
+			}
+		}
+		for (int x = 0; x < cpueil; x++)
+		{
+			for (int y = 0; y < cpustulp; y++)
+			{
+				gridcpu[x][y] = '*';
 			}
 		}
 	}
@@ -39,6 +59,21 @@ public:
 			cout << endl;
 		}
 	}
+	void cpuBoard()
+	{
+		int k = 0;
+		cout << "  0 1 2 3 4 5 6 7 8 9" << endl; // horizontalus skaiciai
+		for (int x = 0; x < cpueil; x++)
+		{
+			cout << k << " "; // vertikalus skaiciai
+			k++;
+			for (int y = 0; y < cpustulp; y++)
+			{
+				cout << gridcpu[x][y] << " "; // tarpai
+			}
+			cout << endl;
+		}
+	}
 	void laivu_ivedimas()
 	{
 		do
@@ -47,35 +82,36 @@ public:
 			if (mLaivai == 0)
 			{
 				cout << "Iveskite 1 laivo koordinates (2vietos): ";
-				cin >> x >> y;
+				cin >> p_eil >> p_stulp;
 			}
 			else if (mLaivai == 1)
 			{
 				cout << "Iveskite 2 laivo koordinates (3vietos): ";
-				cin >> x >> y;
+				cin >> p_eil >> p_stulp;
 			}
 			else if (mLaivai == 2)
 			{
 				cout << "Iveskite 3 laivo koordinates (4vietos): ";
-				cin >> x >> y;
+				cin >> p_eil >> p_stulp;
 			}
 			else if (mLaivai == 3)
 			{
 				cout << "Iveskite 4 laivo koordiantes (5vietos): ";
-				cin >> x >> y;
+				cin >> p_eil >> p_stulp;
 			}
 			ribos();
 			if (tinka == true)
 			{
 				mLaivai++;
 			}
-		} while (!tinka || mLaivai < 4);
+		} while (mLaivai < 4 || !tinka);
 	}
 	void ribos()
 	{
-		if (x < 0 || x > 9 || y < 0 || y > 9)
+		if (p_eil < 0 || p_eil >= 10 || p_stulp < 0 || p_stulp >= 10)
 		{
 			tinka = false;
+			pBoard();
 			cout << "Negalima del ribu" << endl;
 		}
 		else
@@ -85,29 +121,29 @@ public:
 	}
 	void laivu_statymas()
 	{
-		if (grid[x][y] == '*')
+		if (grid[p_eil][p_stulp] == '*')
 		{
 			if (mLaivai == 0)
 			{
-				grid[x][y] = 'P';
+				grid[p_eil][p_stulp] = 'P';
 			}
 			else if (mLaivai == 1)
 			{
-				grid[x][y] = 'S';
+				grid[p_eil][p_stulp] = 'S';
 			}
 			else if (mLaivai == 2)
 			{
-				grid[x][y] = 'D';
+				grid[p_eil][p_stulp] = 'D';
 			}
 			else if (mLaivai == 3)
 			{
-				grid[x][y] = 'H';
+				grid[p_eil][p_stulp] = 'H';
 			}
 			hor_ar_vert();
 		}
-		else
+		else 
 		{
-			cout << "Negalima nes vieta uzimta" << endl;
+			grid[p_eil][p_stulp] = '*';
 			tinka = false;
 		}
 	}
@@ -117,69 +153,191 @@ public:
 		cin >> kryptis;
 		if (kryptis == 'h')
 		{
-			if (mLaivai == 0 && grid[x][y+1] == '*')
+			if (mLaivai == 0 && grid[p_eil][p_stulp+1] == '*' && p_eil < 8 && p_stulp < 8)
 			{
-				grid[x][y+1] = 'P';
+				grid[p_eil][p_stulp+1] = 'P';
 			}
-			else if (mLaivai == 1 && grid[x][y + 1] == '*' && grid[x][y + 2] == '*')
+			else if (mLaivai == 1 && grid[p_eil][p_stulp + 1] == '*' && grid[p_eil][p_stulp + 2] == '*' && p_eil < 8 && p_stulp < 8)
 			{
-				grid[x][y + 1] = 'S';
-				grid[x][y + 2] = 'S';
+				grid[p_eil][p_stulp + 1] = 'S';
+				grid[p_eil][p_stulp + 2] = 'S';
 			}
-			else if (mLaivai == 2 && grid[x][y + 1] == '*' && grid[x][y + 2] == '*' && grid[x][y + 3] == '*')
+			else if (mLaivai == 2 && grid[p_eil][p_stulp + 1] == '*' && grid[p_eil][p_stulp + 2] == '*' && grid[p_eil][p_stulp + 3] == '*' && p_eil < 8 && p_stulp < 8)
 			{
-				grid[x][y + 1] = 'D';
-				grid[x][y + 2] = 'D';
-				grid[x][y + 3] = 'D';
+				grid[p_eil][p_stulp + 1] = 'D';
+				grid[p_eil][p_stulp + 2] = 'D';
+				grid[p_eil][p_stulp + 3] = 'D';
 			}
-			else if (mLaivai == 3 && grid[x][y + 1] == '*' && grid[x][y + 2] == '*' && grid[x][y + 3] == '*' && grid[x][y + 4] == '*')
+			else if (mLaivai == 3 && grid[p_eil][p_stulp + 1] == '*' && grid[p_eil][p_stulp + 2] == '*' && grid[p_eil][p_stulp + 3] == '*' && grid[p_eil][p_stulp + 4] == '*' && p_eil < 8 && p_stulp < 8)
 			{
-				grid[x][y + 1] = 'H';
-				grid[x][y + 2] = 'H';
-				grid[x][y + 3] = 'H';
-				grid[x][y + 4] = 'H';
+				grid[p_eil][p_stulp + 1] = 'H';
+				grid[p_eil][p_stulp + 2] = 'H';
+				grid[p_eil][p_stulp + 3] = 'H';
+				grid[p_eil][p_stulp + 4] = 'H';
+				grid[p_eil][p_stulp + 5] = '*';
 			}
 			else
 			{
-				cout << "Netelpa nes per mazai horizontalios vietos" << endl;
-				grid[x][y] = '*';
+				grid[p_eil][p_stulp] = '*';
 				tinka = false;
 			}
 
 		}
-		if (kryptis == 'v')
+		else if (kryptis == 'v')
 		{
-			if (mLaivai == 0 && grid[x+1][y] == '*')
+			if (mLaivai == 0 && grid[p_eil + 1][p_stulp] == '*' && p_eil < 8 && p_stulp < 8)
 			{
-				grid[x+1][y] = 'P';
+				grid[p_eil + 1][p_stulp] = 'P';
 			}
-			else if (mLaivai == 1 && grid[x+1][y] == '*' && grid[x+2][y] == '*')
+			else if (mLaivai == 1 && grid[p_eil + 1][p_stulp] == '*' && grid[p_eil + 2][p_stulp] == '*' && p_eil < 8 && p_stulp < 8)
 			{
-				grid[x + 1][y] = 'S';
-				grid[x + 2][y] = 'S';
+				grid[p_eil + 1][p_stulp] = 'S';
+				grid[p_eil + 2][p_stulp] = 'S';
 			}
-			else if (mLaivai == 2 && grid[x+1][y] == '*' && grid[x+2][y] == '*' && grid[x+3][y] == '*')
+			else if (mLaivai == 2 && grid[p_eil + 1][p_stulp] == '*' && grid[p_eil + 2][p_stulp] == '*' && grid[p_eil + 3][p_stulp] == '*' && p_eil < 8 && p_stulp < 8)
 			{
-				grid[x + 1][y] = 'D';
-				grid[x + 2][y] = 'D';
-				grid[x + 3][y] = 'D';
+				grid[p_eil + 1][p_stulp] = 'D';
+				grid[p_eil + 2][p_stulp] = 'D';
+				grid[p_eil + 3][p_stulp] = 'D';
 			}
-			else if (mLaivai == 3 && grid[x+1][y] == '*' && grid[x+2][y] == '*' && grid[x+3][y] == '*' && grid[x+4][y] == '*')
+			else if (mLaivai == 3 && grid[p_eil + 1][p_stulp] == '*' && grid[p_eil + 2][p_stulp] == '*' && grid[p_eil + 3][p_stulp] == '*' && grid[p_eil + 4][p_stulp] == '*' && p_eil < 8 && p_stulp < 8)
 			{
-				grid[x + 1][y] = 'H';
-				grid[x + 2][y] = 'H';
-				grid[x + 3][y] = 'H';
-				grid[x + 4][y] = 'H';
+				grid[p_eil + 1][p_stulp] = 'H';
+				grid[p_eil + 2][p_stulp] = 'H';
+				grid[p_eil + 3][p_stulp] = 'H';
+				grid[p_eil + 4][p_stulp] = 'H';
 			}
 			else
 			{
-				cout << "Netelpa nes per mazai vertikalios vietos" << endl;
-				grid[x][y] = '*';
+				grid[p_eil][p_stulp] = '*';
 				tinka = false;
 			}
 		}
+		else
+		{
+			grid[p_eil][p_stulp] = '*';
+			tinka = false;
+		}
 		system("cls");
 		pBoard();
+	}
+	void cpu_laivai_ivedimas()
+	{
+		do
+		{
+			cpuTinka = true;
+			srand(time(0));
+			cpu_eil = rand() % 10;
+			cpu_stulp = rand() % 10;
+			cpu_g_ribos();
+			if (cpuTinka == true)
+			{
+				cpuLaivai++;
+			}
+		} while (cpuLaivai < 4 || !cpuTinka);
+	}
+	void cpu_g_ribos()
+	{
+		if (cpu_eil < 0 || cpu_eil >= 10 || cpu_stulp < 0 || cpu_stulp >= 10)
+		{
+			tinka = false;
+		}
+		else
+		{
+			cpu_statymas();
+		}
+	}
+	void cpu_statymas()
+	{
+		if (gridcpu[cpu_eil][cpu_stulp] == '*')
+		{
+			if (cpuLaivai == 0)
+			{
+				gridcpu[cpu_eil][cpu_stulp] = 'P';
+			}
+			else if (cpuLaivai == 1)
+			{
+				gridcpu[cpu_eil][cpu_stulp] = 'S';
+			}
+			else if (cpuLaivai == 2)
+			{
+				gridcpu[cpu_eil][cpu_stulp] = 'D';
+			}
+			else if (cpuLaivai == 3)
+			{
+				gridcpu[cpu_eil][cpu_stulp] = 'H';
+			}
+			cpu_hort_ar_vert();
+		}
+		else
+		{
+			cpuTinka = false;
+		}
+	}
+	void cpu_hort_ar_vert()
+	{
+		cpuKryptis = 1 + rand() % 2;
+		if (cpuKryptis == 1)
+		{
+			if (cpuLaivai == 0 && gridcpu[cpu_eil][cpu_stulp + 1] == '*' && cpu_eil < 8 && cpu_stulp < 8)
+			{
+				gridcpu[cpu_eil][cpu_stulp + 1] = 'P';
+			}
+			else if (cpuLaivai == 1 && gridcpu[cpu_eil][cpu_stulp + 1] == '*' && gridcpu[cpu_eil][cpu_stulp + 2] == '*' && cpu_eil < 8 && cpu_stulp < 8)
+			{
+				gridcpu[cpu_eil][cpu_stulp + 1] = 'S';
+				gridcpu[cpu_eil][cpu_stulp + 2] = 'S';
+			}
+			else if (cpuLaivai == 2 && gridcpu[cpu_eil][cpu_stulp + 1] == '*' && gridcpu[cpu_eil][cpu_stulp + 2] == '*' && gridcpu[cpu_eil][cpu_stulp + 3] == '*'&& cpu_eil < 8 && cpu_stulp < 8)
+			{
+				gridcpu[cpu_eil][cpu_stulp + 1] = 'D';
+				gridcpu[cpu_eil][cpu_stulp + 2] = 'D';
+				gridcpu[cpu_eil][cpu_stulp + 3] = 'D';
+			}
+			else if (cpuLaivai == 3 && gridcpu[cpu_eil][cpu_stulp + 1] == '*' && gridcpu[cpu_eil][cpu_stulp + 2] == '*' && gridcpu[cpu_eil][cpu_stulp + 3] == '*' && gridcpu[cpu_eil][cpu_stulp + 4] == '*'&& cpu_eil < 8 && cpu_stulp < 8)
+			{
+				gridcpu[cpu_eil][cpu_stulp + 1] = 'H';
+				gridcpu[cpu_eil][cpu_stulp + 2] = 'H';
+				gridcpu[cpu_eil][cpu_stulp + 3] = 'H';
+				gridcpu[cpu_eil][cpu_stulp + 4] = 'H';
+			}
+			else
+			{
+				gridcpu[cpu_eil][cpu_stulp] = '*';
+				cpuTinka = false;
+			}
+		}
+		else if (cpuKryptis == 2)
+		{
+			if (cpuLaivai == 0 && gridcpu[cpu_eil + 1][cpu_stulp] == '*' && cpu_eil < 8 && cpu_stulp < 8)
+			{
+				gridcpu[cpu_eil + 1][cpu_stulp] = 'P';
+			}
+			else if (cpuLaivai == 1 && gridcpu[cpu_eil + 1][cpu_stulp] == '*' && gridcpu[cpu_eil + 2][cpu_stulp] == '*' && cpu_eil < 8 && cpu_stulp < 8)
+			{
+				gridcpu[cpu_eil + 1][cpu_stulp] = 'S';
+				gridcpu[cpu_eil + 2][cpu_stulp] = 'S';
+			}
+			else if (cpuLaivai == 2 && gridcpu[cpu_eil + 1][cpu_stulp] == '*' && gridcpu[cpu_eil + 2][cpu_stulp] == '*' && gridcpu[cpu_eil + 3][cpu_stulp] == '*' && cpu_eil < 8 && cpu_stulp < 8)
+			{
+				gridcpu[cpu_eil + 1][cpu_stulp] = 'D';
+				gridcpu[cpu_eil + 2][cpu_stulp] = 'D';
+				gridcpu[cpu_eil + 3][cpu_stulp] = 'D';
+			}
+			else if (cpuLaivai == 3 && gridcpu[cpu_eil + 1][cpu_stulp] == '*' && gridcpu[cpu_eil + 2][cpu_stulp] == '*' && gridcpu[cpu_eil + 3][cpu_stulp] == '*' && gridcpu[cpu_eil + 4][cpu_stulp] == '*' && cpu_eil < 8 && cpu_stulp < 8)
+			{
+				gridcpu[cpu_eil + 1][cpu_stulp] = 'H';
+				gridcpu[cpu_eil + 2][cpu_stulp] = 'H';
+				gridcpu[cpu_eil + 3][cpu_stulp] = 'H';
+				gridcpu[cpu_eil + 4][cpu_stulp] = 'H';
+			}
+			else
+			{
+				gridcpu[cpu_eil][cpu_stulp] = '*';
+				cpuTinka = false;
+			}
+		}
+		cpuBoard();
 	}
 };
 
@@ -192,6 +350,13 @@ int main()
 	player.laivu_ivedimas();
 	player.laivu_statymas();
 	player.hor_ar_vert();
+	cout << endl;
+	cout << "	Kompiuteris" << endl;
+	computer.cpuBoard();
+	computer.cpu_laivai_ivedimas();
+	computer.cpu_g_ribos();
+	computer.cpu_statymas();
+	computer.cpu_hort_ar_vert();
 
 }
 
