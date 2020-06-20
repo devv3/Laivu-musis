@@ -149,77 +149,79 @@ public:
 	}
 	void hor_ar_vert()
 	{
-		cout << "Spauskite (h) noredami padeti laiva horizontaliai arba (v) noredami padeti vertikaliai: ";
-		cin >> kryptis;
-		if (kryptis == 'h')
+		if (mLaivai < 4)
 		{
-			if (mLaivai == 0 && grid[p_eil][p_stulp+1] == '*' && p_eil < 8 && p_stulp < 8)
+			cout << "Spauskite (h) noredami padeti laiva horizontaliai arba (v) noredami padeti vertikaliai: ";
+			cin >> kryptis;
+			if (kryptis == 'h')
 			{
-				grid[p_eil][p_stulp+1] = 'P';
-			}
-			else if (mLaivai == 1 && grid[p_eil][p_stulp + 1] == '*' && grid[p_eil][p_stulp + 2] == '*' && p_eil < 8 && p_stulp < 8)
-			{
-				grid[p_eil][p_stulp + 1] = 'S';
-				grid[p_eil][p_stulp + 2] = 'S';
-			}
-			else if (mLaivai == 2 && grid[p_eil][p_stulp + 1] == '*' && grid[p_eil][p_stulp + 2] == '*' && grid[p_eil][p_stulp + 3] == '*' && p_eil < 8 && p_stulp < 8)
-			{
-				grid[p_eil][p_stulp + 1] = 'D';
-				grid[p_eil][p_stulp + 2] = 'D';
-				grid[p_eil][p_stulp + 3] = 'D';
-			}
-			else if (mLaivai == 3 && grid[p_eil][p_stulp + 1] == '*' && grid[p_eil][p_stulp + 2] == '*' && grid[p_eil][p_stulp + 3] == '*' && grid[p_eil][p_stulp + 4] == '*' && p_eil < 8 && p_stulp < 8)
-			{
-				grid[p_eil][p_stulp + 1] = 'H';
-				grid[p_eil][p_stulp + 2] = 'H';
-				grid[p_eil][p_stulp + 3] = 'H';
-				grid[p_eil][p_stulp + 4] = 'H';
-				grid[p_eil][p_stulp + 5] = '*';
-			}
-			else
-			{
-				grid[p_eil][p_stulp] = '*';
-				tinka = false;
-			}
+				if (mLaivai == 0 && grid[p_eil][p_stulp + 1] == '*' && p_eil < 8 && p_stulp < 8)
+				{
+					grid[p_eil][p_stulp + 1] = 'P';
+				}
+				else if (mLaivai == 1 && grid[p_eil][p_stulp + 1] == '*' && grid[p_eil][p_stulp + 2] == '*' && p_eil < 8 && p_stulp < 8)
+				{
+					grid[p_eil][p_stulp + 1] = 'S';
+					grid[p_eil][p_stulp + 2] = 'S';
+				}
+				else if (mLaivai == 2 && grid[p_eil][p_stulp + 1] == '*' && grid[p_eil][p_stulp + 2] == '*' && grid[p_eil][p_stulp + 3] == '*' && p_eil < 8 && p_stulp < 8)
+				{
+					grid[p_eil][p_stulp + 1] = 'D';
+					grid[p_eil][p_stulp + 2] = 'D';
+					grid[p_eil][p_stulp + 3] = 'D';
+				}
+				else if (mLaivai == 3 && grid[p_eil][p_stulp + 1] == '*' && grid[p_eil][p_stulp + 2] == '*' && grid[p_eil][p_stulp + 3] == '*' && grid[p_eil][p_stulp + 4] == '*' && p_eil < 8 && p_stulp < 8)
+				{
+					grid[p_eil][p_stulp + 1] = 'H';
+					grid[p_eil][p_stulp + 2] = 'H';
+					grid[p_eil][p_stulp + 3] = 'H';
+					grid[p_eil][p_stulp + 4] = 'H';
+				}
+				else
+				{
+					grid[p_eil][p_stulp] = '*';
+					tinka = false;
+				}
 
-		}
-		else if (kryptis == 'v')
-		{
-			if (mLaivai == 0 && grid[p_eil + 1][p_stulp] == '*' && p_eil < 8 && p_stulp < 8)
-			{
-				grid[p_eil + 1][p_stulp] = 'P';
 			}
-			else if (mLaivai == 1 && grid[p_eil + 1][p_stulp] == '*' && grid[p_eil + 2][p_stulp] == '*' && p_eil < 8 && p_stulp < 8)
+			else if (kryptis == 'v')
 			{
-				grid[p_eil + 1][p_stulp] = 'S';
-				grid[p_eil + 2][p_stulp] = 'S';
-			}
-			else if (mLaivai == 2 && grid[p_eil + 1][p_stulp] == '*' && grid[p_eil + 2][p_stulp] == '*' && grid[p_eil + 3][p_stulp] == '*' && p_eil < 8 && p_stulp < 8)
-			{
-				grid[p_eil + 1][p_stulp] = 'D';
-				grid[p_eil + 2][p_stulp] = 'D';
-				grid[p_eil + 3][p_stulp] = 'D';
-			}
-			else if (mLaivai == 3 && grid[p_eil + 1][p_stulp] == '*' && grid[p_eil + 2][p_stulp] == '*' && grid[p_eil + 3][p_stulp] == '*' && grid[p_eil + 4][p_stulp] == '*' && p_eil < 8 && p_stulp < 8)
-			{
-				grid[p_eil + 1][p_stulp] = 'H';
-				grid[p_eil + 2][p_stulp] = 'H';
-				grid[p_eil + 3][p_stulp] = 'H';
-				grid[p_eil + 4][p_stulp] = 'H';
+				if (mLaivai == 0 && grid[p_eil + 1][p_stulp] == '*' && p_eil < 8 && p_stulp < 8)
+				{
+					grid[p_eil + 1][p_stulp] = 'P';
+				}
+				else if (mLaivai == 1 && grid[p_eil + 1][p_stulp] == '*' && grid[p_eil + 2][p_stulp] == '*' && p_eil < 8 && p_stulp < 8)
+				{
+					grid[p_eil + 1][p_stulp] = 'S';
+					grid[p_eil + 2][p_stulp] = 'S';
+				}
+				else if (mLaivai == 2 && grid[p_eil + 1][p_stulp] == '*' && grid[p_eil + 2][p_stulp] == '*' && grid[p_eil + 3][p_stulp] == '*' && p_eil < 8 && p_stulp < 8)
+				{
+					grid[p_eil + 1][p_stulp] = 'D';
+					grid[p_eil + 2][p_stulp] = 'D';
+					grid[p_eil + 3][p_stulp] = 'D';
+				}
+				else if (mLaivai == 3 && grid[p_eil + 1][p_stulp] == '*' && grid[p_eil + 2][p_stulp] == '*' && grid[p_eil + 3][p_stulp] == '*' && grid[p_eil + 4][p_stulp] == '*' && p_eil < 8 && p_stulp < 8)
+				{
+					grid[p_eil + 1][p_stulp] = 'H';
+					grid[p_eil + 2][p_stulp] = 'H';
+					grid[p_eil + 3][p_stulp] = 'H';
+					grid[p_eil + 4][p_stulp] = 'H';
+				}
+				else
+				{
+					grid[p_eil][p_stulp] = '*';
+					tinka = false;
+				}
 			}
 			else
 			{
 				grid[p_eil][p_stulp] = '*';
 				tinka = false;
 			}
+			system("cls");
+			pBoard();
 		}
-		else
-		{
-			grid[p_eil][p_stulp] = '*';
-			tinka = false;
-		}
-		system("cls");
-		pBoard();
 	}
 	void cpu_laivai_ivedimas()
 	{
@@ -276,68 +278,70 @@ public:
 	}
 	void cpu_hort_ar_vert()
 	{
-		cpuKryptis = 1 + rand() % 2;
-		if (cpuKryptis == 1)
+		if (cpuLaivai < 4)
 		{
-			if (cpuLaivai == 0 && gridcpu[cpu_eil][cpu_stulp + 1] == '*' && cpu_eil < 8 && cpu_stulp < 8)
+			cpuKryptis = 1 + rand() % 2;
+			if (cpuKryptis == 1)
 			{
-				gridcpu[cpu_eil][cpu_stulp + 1] = 'P';
+				if (cpuLaivai == 0 && gridcpu[cpu_eil][cpu_stulp + 1] == '*' && cpu_eil < 7 && cpu_stulp < 7)
+				{
+					gridcpu[cpu_eil][cpu_stulp + 1] = 'P';
+				}
+				else if (cpuLaivai == 1 && gridcpu[cpu_eil][cpu_stulp + 1] == '*' && gridcpu[cpu_eil][cpu_stulp + 2] == '*' && cpu_eil <7 && cpu_stulp < 7)
+				{
+					gridcpu[cpu_eil][cpu_stulp + 1] = 'S';
+					gridcpu[cpu_eil][cpu_stulp + 2] = 'S';
+				}
+				else if (cpuLaivai == 2 && gridcpu[cpu_eil][cpu_stulp + 1] == '*' && gridcpu[cpu_eil][cpu_stulp + 2] == '*' && gridcpu[cpu_eil][cpu_stulp + 3] == '*'&& cpu_eil < 7 && cpu_stulp < 7)
+				{
+					gridcpu[cpu_eil][cpu_stulp + 1] = 'D';
+					gridcpu[cpu_eil][cpu_stulp + 2] = 'D';
+					gridcpu[cpu_eil][cpu_stulp + 3] = 'D';
+				}
+				else if (cpuLaivai == 3 && gridcpu[cpu_eil][cpu_stulp + 1] == '*' && gridcpu[cpu_eil][cpu_stulp + 2] == '*' && gridcpu[cpu_eil][cpu_stulp + 3] == '*' && gridcpu[cpu_eil][cpu_stulp + 4] == '*'&& cpu_eil < 7 && cpu_stulp < 7)
+				{
+					gridcpu[cpu_eil][cpu_stulp + 1] = 'H';
+					gridcpu[cpu_eil][cpu_stulp + 2] = 'H';
+					gridcpu[cpu_eil][cpu_stulp + 3] = 'H';
+					gridcpu[cpu_eil][cpu_stulp + 4] = 'H';
+				}
+				else
+				{
+					gridcpu[cpu_eil][cpu_stulp] = '*';
+					cpuTinka = false;
+				}
 			}
-			else if (cpuLaivai == 1 && gridcpu[cpu_eil][cpu_stulp + 1] == '*' && gridcpu[cpu_eil][cpu_stulp + 2] == '*' && cpu_eil < 8 && cpu_stulp < 8)
+			else if (cpuKryptis == 2)
 			{
-				gridcpu[cpu_eil][cpu_stulp + 1] = 'S';
-				gridcpu[cpu_eil][cpu_stulp + 2] = 'S';
-			}
-			else if (cpuLaivai == 2 && gridcpu[cpu_eil][cpu_stulp + 1] == '*' && gridcpu[cpu_eil][cpu_stulp + 2] == '*' && gridcpu[cpu_eil][cpu_stulp + 3] == '*'&& cpu_eil < 8 && cpu_stulp < 8)
-			{
-				gridcpu[cpu_eil][cpu_stulp + 1] = 'D';
-				gridcpu[cpu_eil][cpu_stulp + 2] = 'D';
-				gridcpu[cpu_eil][cpu_stulp + 3] = 'D';
-			}
-			else if (cpuLaivai == 3 && gridcpu[cpu_eil][cpu_stulp + 1] == '*' && gridcpu[cpu_eil][cpu_stulp + 2] == '*' && gridcpu[cpu_eil][cpu_stulp + 3] == '*' && gridcpu[cpu_eil][cpu_stulp + 4] == '*'&& cpu_eil < 8 && cpu_stulp < 8)
-			{
-				gridcpu[cpu_eil][cpu_stulp + 1] = 'H';
-				gridcpu[cpu_eil][cpu_stulp + 2] = 'H';
-				gridcpu[cpu_eil][cpu_stulp + 3] = 'H';
-				gridcpu[cpu_eil][cpu_stulp + 4] = 'H';
-			}
-			else
-			{
-				gridcpu[cpu_eil][cpu_stulp] = '*';
-				cpuTinka = false;
+				if (cpuLaivai == 0 && gridcpu[cpu_eil + 1][cpu_stulp] == '*' && cpu_eil < 7 && cpu_stulp < 7)
+				{
+					gridcpu[cpu_eil + 1][cpu_stulp] = 'P';
+				}
+				else if (cpuLaivai == 1 && gridcpu[cpu_eil + 1][cpu_stulp] == '*' && gridcpu[cpu_eil + 2][cpu_stulp] == '*' && cpu_eil < 7 && cpu_stulp < 7)
+				{
+					gridcpu[cpu_eil + 1][cpu_stulp] = 'S';
+					gridcpu[cpu_eil + 2][cpu_stulp] = 'S';
+				}
+				else if (cpuLaivai == 2 && gridcpu[cpu_eil + 1][cpu_stulp] == '*' && gridcpu[cpu_eil + 2][cpu_stulp] == '*' && gridcpu[cpu_eil + 3][cpu_stulp] == '*' && cpu_eil < 7 && cpu_stulp < 7)
+				{
+					gridcpu[cpu_eil + 1][cpu_stulp] = 'D';
+					gridcpu[cpu_eil + 2][cpu_stulp] = 'D';
+					gridcpu[cpu_eil + 3][cpu_stulp] = 'D';
+				}
+				else if (cpuLaivai == 3 && gridcpu[cpu_eil + 1][cpu_stulp] == '*' && gridcpu[cpu_eil + 2][cpu_stulp] == '*' && gridcpu[cpu_eil + 3][cpu_stulp] == '*' && gridcpu[cpu_eil + 4][cpu_stulp] == '*' && cpu_eil < 7 && cpu_stulp < 7)
+				{
+					gridcpu[cpu_eil + 1][cpu_stulp] = 'H';
+					gridcpu[cpu_eil + 2][cpu_stulp] = 'H';
+					gridcpu[cpu_eil + 3][cpu_stulp] = 'H';
+					gridcpu[cpu_eil + 4][cpu_stulp] = 'H';
+				}
+				else
+				{
+					gridcpu[cpu_eil][cpu_stulp] = '*';
+					cpuTinka = false;
+				}
 			}
 		}
-		else if (cpuKryptis == 2)
-		{
-			if (cpuLaivai == 0 && gridcpu[cpu_eil + 1][cpu_stulp] == '*' && cpu_eil < 8 && cpu_stulp < 8)
-			{
-				gridcpu[cpu_eil + 1][cpu_stulp] = 'P';
-			}
-			else if (cpuLaivai == 1 && gridcpu[cpu_eil + 1][cpu_stulp] == '*' && gridcpu[cpu_eil + 2][cpu_stulp] == '*' && cpu_eil < 8 && cpu_stulp < 8)
-			{
-				gridcpu[cpu_eil + 1][cpu_stulp] = 'S';
-				gridcpu[cpu_eil + 2][cpu_stulp] = 'S';
-			}
-			else if (cpuLaivai == 2 && gridcpu[cpu_eil + 1][cpu_stulp] == '*' && gridcpu[cpu_eil + 2][cpu_stulp] == '*' && gridcpu[cpu_eil + 3][cpu_stulp] == '*' && cpu_eil < 8 && cpu_stulp < 8)
-			{
-				gridcpu[cpu_eil + 1][cpu_stulp] = 'D';
-				gridcpu[cpu_eil + 2][cpu_stulp] = 'D';
-				gridcpu[cpu_eil + 3][cpu_stulp] = 'D';
-			}
-			else if (cpuLaivai == 3 && gridcpu[cpu_eil + 1][cpu_stulp] == '*' && gridcpu[cpu_eil + 2][cpu_stulp] == '*' && gridcpu[cpu_eil + 3][cpu_stulp] == '*' && gridcpu[cpu_eil + 4][cpu_stulp] == '*' && cpu_eil < 8 && cpu_stulp < 8)
-			{
-				gridcpu[cpu_eil + 1][cpu_stulp] = 'H';
-				gridcpu[cpu_eil + 2][cpu_stulp] = 'H';
-				gridcpu[cpu_eil + 3][cpu_stulp] = 'H';
-				gridcpu[cpu_eil + 4][cpu_stulp] = 'H';
-			}
-			else
-			{
-				gridcpu[cpu_eil][cpu_stulp] = '*';
-				cpuTinka = false;
-			}
-		}
-		cpuBoard();
 	}
 };
 
@@ -351,12 +355,18 @@ int main()
 	player.laivu_statymas();
 	player.hor_ar_vert();
 	cout << endl;
-	cout << "	Kompiuteris" << endl;
 	computer.cpuBoard();
 	computer.cpu_laivai_ivedimas();
 	computer.cpu_g_ribos();
 	computer.cpu_statymas();
 	computer.cpu_hort_ar_vert();
+	system("cls");
+	cout << "SW NX" << endl;
+	player.pBoard();
+	cout << endl;
+	cout << "	Kompiuteris" << endl;
+	computer.cpuBoard();
+
 
 }
 
